@@ -1,0 +1,30 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+<h1 class="display-4 fw-bold lh-1 mb-3">Update Classroom</h1>
+
+<form class="p-4 p-md-5 border rounded-3 bg-light" method="post">
+    {% csrf_token %}
+    <div class="form-floating mb-3">
+        <input type="text" class="form-control" name="name" id="floatingInput" value="{{ classroom.name }}" required>
+        <label for="floatingInput">Name</label>
+    </div>
+    <div class="form-floating mb-3">
+        <input type="time" class="form-control" name="start_time" id="floatingInput" value="{{ classroom.start_time }}" required>
+        <label for="floatingInput">Start Time</label>
+    </div>
+    <div class="form-floating mb-3">
+        <input type="time" class="form-control" name="end_time" id="floatingInput" value="{{ classroom.end_time }}" required>
+        <label for="floatingInput">End Time</label>
+    </div>
+    <div class="form-floating mb-3">
+        <input type="text" class="form-control" name="active_days" id="floatingInput" value="{{ classroom.active_days }}" required>
+        <label for="floatingInput">Active Days</label>
+    </div>
+
+    <button class="w-100 btn btn-lg btn-primary" type="submit">Update</button>
+    <hr class="my-4">
+</form>
+
+{% endblock %}

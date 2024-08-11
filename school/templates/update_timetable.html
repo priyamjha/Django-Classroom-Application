@@ -1,0 +1,34 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+<h1 class="display-4 fw-bold lh-1 mb-3">Update Timetable</h1>
+
+<form class="p-4 p-md-5 border rounded-3 bg-light" method="post">
+    {% csrf_token %}
+    <div class="form-floating mb-3">
+        <input type="text" class="form-control" name="classroom" id="floatingInput" value="{{ timetable.classroom.name }}" required>
+        <label for="floatingInput">Classroom</label>
+    </div>
+    <div class="form-floating mb-3">
+        <input type="text" class="form-control" name="subject" id="floatingInput" value="{{ timetable.subject }}" required>
+        <label for="floatingInput">Subject</label>
+    </div>
+    <div class="form-floating mb-3">
+        <input type="time" class="form-control" name="start_time" id="floatingInput" value="{{ timetable.start_time }}" required>
+        <label for="floatingInput">Start Time</label>
+    </div>
+    <div class="form-floating mb-3">
+        <input type="time" class="form-control" name="end_time" id="floatingInput" value="{{ timetable.end_time }}" required>
+        <label for="floatingInput">End Time</label>
+    </div>
+    <div class="form-floating mb-3">
+        <input type="text" class="form-control" name="days" id="floatingInput" value="{{ timetable.days }}" required>
+        <label for="floatingInput">Days</label>
+    </div>
+
+    <button class="w-100 btn btn-lg btn-primary" type="submit">Update</button>
+    <hr class="my-4">
+</form>
+
+{% endblock %}

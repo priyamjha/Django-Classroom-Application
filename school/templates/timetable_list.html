@@ -1,0 +1,60 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+<div class="card-body">
+    <h1 class="display-4 fw-bold lh-1 mb-3">Timetable List</h1>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th scope="col">Classroom</th>
+                <th scope="col">Subject</th>
+                <th scope="col">Start Time</th>
+                <th scope="col">End Time</th>
+                <th scope="col">Days</th>
+                <th scope="col">Update</th>
+                <th scope="col">Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for timetable in timetables %}
+            <tr>
+                <td>{{ timetable.classroom.name }}</td>
+                <td>{{ timetable.subject }}</td>
+                <td>{{ timetable.start_time }}</td>
+                <td>{{ timetable.end_time }}</td>
+                <td>{{ timetable.days }}</td>
+                {% if not request.user.is_student %}
+                <td><a class="btn btn-outline-success btn-sm" href="{% url 'update_timetable' timetable.id %}">Update</a></td>
+                <td><a class="btn btn-outline-warning btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal{{ timetable.id }}" href="#">Delete</a></td>
+                {% endif %}
+            </tr>
+
+            <!-- Modal -->
+            <div class="modal fade" id="exampleModal{{ timetable.id }}" tabindex="-1" aria-labelledby="exampleModalLabel{{ timetable.id }}" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="exampleModalLabel{{ timetable.id }}">{{ timetable.classroom.name }}</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            Are you sure you want to permanently delete this timetable?
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <form action="{% url 'delete_timetable' timetable.id %}" method="post">
+                                {% csrf_token %}
+                                <button type="submit" class="btn btn-primary">Yes</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% endblock content %}

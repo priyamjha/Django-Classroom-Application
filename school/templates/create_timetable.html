@@ -1,0 +1,48 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+<h1 class="display-4 fw-bold lh-1 mb-3">Create Timetable</h1>
+<form class="p-4 p-md-5 border rounded-3 bg-light" method="POST">
+    {% csrf_token %}
+    
+    <!-- Select Classroom -->
+    <div class="form-floating mb-3">
+        <select class="form-select" name="classroom" id="floatingClassroom" required>
+            <option value="" selected>Select Classroom</option>
+            {% for classroom in classrooms %}
+                <option value="{{ classroom.id }}">{{ classroom.name }}</option>
+            {% endfor %}
+        </select>
+        <label for="floatingClassroom">Classroom</label>
+    </div>
+
+    <!-- Subject -->
+    <div class="form-floating mb-3">
+        <input type="text" class="form-control" name="subject" id="floatingSubject" required>
+        <label for="floatingSubject">Subject</label>
+    </div>
+
+    <!-- Start Time -->
+    <div class="form-floating mb-3">
+        <input type="time" name="start_time" class="form-control" id="floatingStartTime" required>
+        <label for="floatingStartTime">Start Time</label>
+    </div>
+
+    <!-- End Time -->
+    <div class="form-floating mb-3">
+        <input type="time" name="end_time" class="form-control" id="floatingEndTime" required>
+        <label for="floatingEndTime">End Time</label>
+    </div>
+
+    <!-- Days -->
+    <div class="form-floating mb-3">
+        <input type="text" name="days" class="form-control" id="floatingDays" required>
+        <label for="floatingDays">Days (e.g., Monday, Tuesday)</label>
+    </div>
+
+    <button class="w-100 btn btn-lg btn-primary" type="submit">Create Timetable</button>
+    <hr class="my-4">
+</form>
+
+{% endblock content %}

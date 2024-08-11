@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+              <form class="p-4 p-md-5 border rounded-3 bg-light"  method="post">
+                  {% csrf_token %}
+                  <div class="form-floating mb-3">
+                    <input type="email" class="form-control" name="email" id="floatingInput" required>
+                    <label for="floatingInput">Email</label>
+                </div>
+                <div class="form-floating mb-3">
+                  <input type="password" name="password"class="form-control" id="floatingPassword" required>
+                  <label for="floatingPassword">Password</label>
+                </div>
+
+
+                <input type="submit" value="Log In" class="w-100 btn btn-lg btn-primary">
+              </form>
+
+
+
+{% endblock content %}
+

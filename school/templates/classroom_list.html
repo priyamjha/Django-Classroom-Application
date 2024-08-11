@@ -1,0 +1,56 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+<div class="card-body">
+    <h1 class="display-4 fw-bold lh-1 mb-3">Classroom List</h1>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th scope="col">Name</th>
+                <th scope="col">Start Time</th>
+                <th scope="col">End Time</th>
+                <th scope="col">Active Days</th>
+                <th scope="col">Update</th>
+                <th scope="col">Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for classroom in classrooms %}
+            <tr>
+                <td>{{ classroom.name }}</td>
+                <td>{{ classroom.start_time }}</td>
+                <td>{{ classroom.end_time }}</td>
+                <td>{{ classroom.active_days }}</td>
+                <td><a class="btn btn-outline-success btn-sm" href="{% url 'update_classroom' classroom.id %}">Update</a></td>
+                <td><a class="btn btn-outline-warning btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal{{ classroom.id }}" href="#">Delete</a></td>
+            </tr>
+
+            <!-- Modal -->
+            <div class="modal fade" id="exampleModal{{ classroom.id }}" tabindex="-1" aria-labelledby="exampleModalLabel{{ classroom.id }}" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="exampleModalLabel{{ classroom.id }}">{{ classroom.name }}</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            Are you sure you want to permanently delete this classroom?
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <form action="{% url 'delete_classroom' classroom.id %}" method="post">
+                                {% csrf_token %}
+                                <button type="submit" class="btn btn-primary">Yes</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% endblock content %}

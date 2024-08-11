@@ -1,0 +1,25 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+<h1 class="display-4 fw-bold lh-1 mb-3">Student Dashboard</h1>
+<br>
+<hr class="my-4">
+<!-- <br>
+<h3 class="display-4 fw-bold lh-1 mb-3"> Hello {{ user.username }}</h3>
+
+<br>
+<hr class="my-4">
+<br> -->
+
+
+<a href="{% url 'student_details' %}" class="btn btn-primary">All Student</a>
+
+
+<hr class="my-4">
+
+
+<a href="{% url 'timetable_list' %}" class="btn btn-primary">All timetable</a>
+
+
+{% endblock content %}

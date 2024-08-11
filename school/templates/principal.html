@@ -1,0 +1,36 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+<h1 class="display-4 fw-bold lh-1 mb-3">Principal Dashboard</h1>
+<br>
+<hr class="my-4">
+<!-- <br>
+<h3 class="display-4 fw-bold lh-1 mb-3"> Hello {{ user.username }}</h3>
+
+<br>
+<hr class="my-4">
+<br> -->
+
+<a href="{% url 'teacher_register' %}" class="btn btn-primary">Create Teacher</a>
+
+<a href="{% url 'teacher_details' %}" class="btn btn-primary">All Teacher</a>
+
+<hr class="my-4">
+<a href="{% url 'student_register' %}" class="btn btn-primary">Create Student</a>
+
+<a href="{% url 'student_details' %}" class="btn btn-primary">All Student</a>
+
+<hr class="my-4">
+<a href="{% url 'create_classroom' %}" class="btn btn-primary">Create Classroom</a>
+
+<a href="{% url 'classroom_list' %}" class="btn btn-primary">All classroom</a>
+
+<hr class="my-4">
+
+<a href="{% url 'create_timetable' %}" class="btn btn-primary">Create Timetable</a>
+
+<a href="{% url 'timetable_list' %}" class="btn btn-primary">All timetable</a>
+
+
+{% endblock content %}

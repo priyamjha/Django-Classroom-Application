@@ -1,0 +1,57 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+<div class="card-body">
+    <h1 class="display-4 fw-bold lh-1 mb-3">Student Details</h1>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th scope="col">Username</th>
+                <th scope="col">Email</th>
+                <th scope="col">Update</th>
+                <th scope="col">Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for student in students %}
+            <tr>
+                <td>{{ student.username }}</td>
+                <td>{{ student.email }}</td>
+                {% if not request.user.is_student and not request.user.is_teacher %}
+                <td><a class="btn btn-outline-success btn-sm" href="{% url 'update_student' student.id %}">Update</a></td>
+                <td>
+                    <a class="btn btn-outline-warning btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal{{ student.id }}" href="#">Delete</a>
+                </td>
+                {% endif %}
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<!-- Modal Template -->
+{% for student in students %}
+<div class="modal fade" id="exampleModal{{ student.id }}" tabindex="-1" aria-labelledby="exampleModalLabel{{ student.id }}" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="exampleModalLabel{{ student.id }}">{{ student.username }}</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                Are you sure you want to permanently delete this student?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <form action="{% url 'delete_student' student.id %}" method="post">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-primary">Yes</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endfor %}
+
+{% endblock content %}
